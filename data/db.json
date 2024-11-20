@@ -3,32 +3,26 @@
     {
       "id": "1",
       "name": "Computer",
-      "price": 4000,
+      "price": 4500,
       "checked": true
     },
     {
-      "id": "2",
-      "name": "youtube",
-      "price": 3000,
+      "id": "LaC2DDm",
+      "name": "Pencil",
+      "price": "1.5",
       "checked": false
     },
     {
-      "id": "2",
-      "name": "fb",
-      "price": 8000,
-      "checked": true
-    },
-    {
-      "id": "56f4",
-      "name": "uu",
+      "name": "Printer",
       "price": "10000",
-      "checked": false
+      "checked": false,
+      "id": "5YtKeci"
     },
     {
-      "id": "4317",
-      "name": "souris",
-      "price": "100",
-      "checked": false
+      "name": "Data show",
+      "price": "5000",
+      "checked": true,
+      "id": "o5wNUeZ"
     }
   ]
 }

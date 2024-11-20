@@ -11,8 +11,8 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
-  public getProducts(page: number = 1, size: number = 4): Observable<Array<Product>> {
-    return this.http.get<Array<Product>>(`http://localhost:8088/products?_page=${page}&_limit=${size}`);
+  public getProducts(keyword: string = '', page: number = 1, size: number = 4) {
+    return this.http.get(`http://localhost:8088/products?name_like=${keyword}&_page=${page}&_limit=${size}`, {observe: 'response'}); // get headers HttpResponse
   }
 
   public checkProduct(product: Product) {
@@ -27,8 +27,15 @@ export class ProductService {
     return this.http.post<Product>(`http://localhost:8088/products`, product);
   }
 
-  public searchProducts(keyword: string): Observable<Array<Product>> {
-    return this.http.get<Array<Product>>(`http://localhost:8088/products?name_like=${keyword}`);
+  /*public searchProducts(keyword: string, page: number = 1, size: number = 4): Observable<Array<Product>> {
+    return this.http.get<Array<Product>>(`http://localhost:8088/products?name_like=${keyword}&_page=${page}&_limit=${size}`);
+  }*/
+
+  getProductsById(productId: number): Observable<Product> {
+    return this.http.get<Product>(`http://localhost:8088/products/${productId}`);
   }
 
+  updateProduct(product: Product): Observable<Product> {
+    return this.http.put<Product>(`http://localhost:8088/products/${product.id}`, product);
+  }
 }
