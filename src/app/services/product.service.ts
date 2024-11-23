@@ -8,23 +8,25 @@ import {Product} from "../model/product.model";
 })
 export class ProductService {
 
+  private url: string = "http://localhost:8088/products";
+
   constructor(private http: HttpClient) {
   }
 
   public getProducts(keyword: string = '', page: number = 1, size: number = 4) {
-    return this.http.get(`http://localhost:8088/products?name_like=${keyword}&_page=${page}&_limit=${size}`, {observe: 'response'}); // get headers HttpResponse
+    return this.http.get(`${this.url}?name_like=${keyword}&_page=${page}&_limit=${size}`, {observe: 'response'}); // get headers HttpResponse
   }
 
   public checkProduct(product: Product) {
-    return this.http.patch<Product>(`http://localhost:8088/products/${product.id}`, {checked: !product.checked});
+    return this.http.patch<Product>(`${this.url}/${product.id}`, {checked: !product.checked});
   }
 
   public deleteProduct(product: Product) {
-    return this.http.delete<Product>(`http://localhost:8088/products/${product.id}`);
+    return this.http.delete<Product>(`${this.url}/${product.id}`);
   }
 
   saveProduct(product: Product) {
-    return this.http.post<Product>(`http://localhost:8088/products`, product);
+    return this.http.post<Product>(`${this.url}`, product);
   }
 
   /*public searchProducts(keyword: string, page: number = 1, size: number = 4): Observable<Array<Product>> {
@@ -32,10 +34,10 @@ export class ProductService {
   }*/
 
   getProductsById(productId: number): Observable<Product> {
-    return this.http.get<Product>(`http://localhost:8088/products/${productId}`);
+    return this.http.get<Product>(`${this.url}/${productId}`);
   }
 
   updateProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>(`http://localhost:8088/products/${product.id}`, product);
+    return this.http.put<Product>(`${this.url}/${product.id}`, product);
   }
 }

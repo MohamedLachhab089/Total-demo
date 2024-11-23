@@ -1,18 +1,4 @@
-<nav class="p-4">
-  <ul class="nav nav-pills justify-content-center" style="gap: 15px;">
-    <li *ngFor="let action of actions">
-      <button
-        (click)="setCurrentAction(action)"
-        routerLink="{{action.route}}"
-        [class]="action == currentAction ? 'btn btn-success ms-2' : 'btn btn-outline-success ms-2'"
-        class="btn-icon d-flex align-items-center"
-        style="border-radius: 25px; padding: 10px 20px; font-size: 1rem;"
-      >
-        <i class="bi bi-{{action.icon}}" style="font-size: 1.3rem; margin-right: 8px;"></i>
-        <span>{{ action.title }}</span>
-      </button>
-    </li>
-  </ul>
-</nav>
-
+<app-navbar></app-navbar>
+<app-dashboard></app-dashboard>
+<app-app-errors></app-app-errors>
 <router-outlet></router-outlet>

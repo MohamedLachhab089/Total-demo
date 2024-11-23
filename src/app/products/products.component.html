@@ -1,11 +1,11 @@
-<div class="p-4">
+<div class="p-1">
   <!-- Card container with some padding and shadow for a clean look -->
   <div class="card shadow-lg border-0 rounded-3">
     <div class="card-body">
       <!-- Search input with rounded edges and light background -->
       <div class="card-body bg-light border rounded shadow-sm p-3 input-group mb-4" style="max-width: 500px; margin: auto;">
         <input
-          type="text" [(ngModel)]="keyword"
+          type="text" [(ngModel)]="appState.productState.keyword"
           (keydown.enter)="getProducts()"
           class="form-control border-0 rounded-start"
           style="width: 85%;"
@@ -28,12 +28,12 @@
         </thead>
         <tbody>
         <!-- Empty state for no products -->
-        <tr *ngIf="products.length === 0">
+        <tr *ngIf="appState.productState.products.length === 0">
           <td colspan="4" class="text-center text-muted">Aucun produit trouvé</td>
         </tr>
 
         <!-- Product rows -->
-        <tr *ngFor="let product of products">
+        <tr *ngFor="let product of appState.productState.products">
           <td>{{ product.name }}</td>
           <td>{{ product.price | currency }}</td>
           <td>
@@ -65,14 +65,14 @@
       <!-- Pagination controls with active page styling -->
       <ul class="nav nav-pills justify-content-center mt-4" style="gap: 10px;">
         <li
-          *ngFor="let page of [].constructor(totalPages); let i = index"
-          [class.active]="currentPage === (i + 1)">
+          *ngFor="let page of [].constructor(appState.productState.totalPages); let i = index"
+          [class.active]="appState.productState.currentPage === (i + 1)">
           <button
             (click)="handleGotoPage(i + 1)"
             class="btn"
             [ngClass]="{
-              'btn-success': currentPage === (i + 1),
-              'btn-outline-success': currentPage !== (i + 1)
+              'btn-success': appState.productState.currentPage === (i + 1),
+              'btn-outline-success': appState.productState.currentPage !== (i + 1)
             }"
             style="min-width: 35px; padding: 5px 10px;">
             {{ i + 1 }}

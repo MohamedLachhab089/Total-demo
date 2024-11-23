@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {ProductService} from "../services/product.service";
 import {Product} from "../model/product.model";
 import {Router} from "@angular/router";
+import {AppStateService} from "../services/app-state.service";
 
 @Component({
   selector: 'app-products',
@@ -12,16 +13,18 @@ import {Router} from "@angular/router";
 })
 export class ProductsComponent implements OnInit {
 
-  public products: Array<Product> = [];
+  /*public products: Array<Product> = [];
 
   //products!: Observable<Product[]>;
 
   public keyword: string = "";
   totalPages: number = 0;
   pageSize: number = 4;
-  currentPage: number = 1;
+  currentPage: number = 1;*/
 
-  constructor(private productService: ProductService, private router:Router) {
+  constructor(private productService: ProductService,
+              private router: Router,
+              public appState: AppStateService) {
   }
 
   ngOnInit(): void {
@@ -29,17 +32,34 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
-    this.productService.getProducts(this.keyword, this.currentPage, this.pageSize)
+
+    // ✅ Done with interceptor => app-http-interceptor 👌👌👌
+    /*this.appState.setProductState({
+      status: "LOADING"
+    })*/
+
+    this.productService.getProducts(this.appState.productState.keyword, this.appState.productState.currentPage, this.appState.productState.pageSize)
       .subscribe({
         next: (data) => {
-          this.products = data.body as Product[];
+          let products = data.body as Product[];
           let totalProducts: number = parseInt(data.headers.get('x-total-count')!); // Indique à TypeScript que cette valeur n'est pas null
-          this.totalPages = Math.floor(totalProducts / this.pageSize);
-          if (totalProducts % this.pageSize != 0) { // Ajout d'une page supplémentaire si nécessaire
-            this.totalPages = this.totalPages + 1;
+          // this.appState.productState.totalProducts = totalProducts;
+          let totalPages = Math.floor(totalProducts / this.appState.productState.pageSize);
+          if (totalProducts % this.appState.productState.pageSize != 0) { // Ajout d'une page supplémentaire si nécessaire
+            ++totalPages;
           }
+          this.appState.setProductState({
+            products: products,
+            totalProducts: totalProducts,
+            totalPages: totalPages,
+            // status: "LOADED" // ✅ Done with interceptor
+          })
         },
         error: err => {
+          this.appState.setProductState({
+            status: "ERROR",
+            errorMessage: err
+          })
           console.log(err);
         }
       })
@@ -59,8 +79,8 @@ export class ProductsComponent implements OnInit {
     if (confirm("Are you sure ?")) {
       this.productService.deleteProduct(product).subscribe({
         next: deleted => {
-          //this.getProducts()
-          this.products = this.products.filter(p => p.id != product.id);
+          this.getProducts()
+          //this.appState.productState.products = this.appState.productState.products.filter((p: any) => p.id != product.id);
         }
       });
     }
@@ -82,7 +102,7 @@ export class ProductsComponent implements OnInit {
   }*/
 
   handleGotoPage(page: number) {
-    this.currentPage = page;
+    this.appState.productState.currentPage = page;
     this.getProducts()
   }
 

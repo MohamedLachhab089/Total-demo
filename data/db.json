@@ -13,16 +13,22 @@
       "checked": false
     },
     {
-      "name": "Printer",
-      "price": "10000",
-      "checked": false,
-      "id": "5YtKeci"
-    },
-    {
       "name": "Data show",
       "price": "5000",
       "checked": true,
       "id": "o5wNUeZ"
+    },
+    {
+      "name": "keyword",
+      "price": 500,
+      "checked": false,
+      "id": "casYRMe"
+    },
+    {
+      "name": "Ecran",
+      "price": 1000,
+      "checked": false,
+      "id": "k3dkn3W"
     }
   ]
 }
