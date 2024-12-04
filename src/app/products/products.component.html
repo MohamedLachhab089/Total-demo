@@ -3,7 +3,8 @@
   <div class="card shadow-lg border-0 rounded-3">
     <div class="card-body">
       <!-- Search input with rounded edges and light background -->
-      <div class="card-body bg-light border rounded shadow-sm p-3 input-group mb-4" style="max-width: 500px; margin: auto;">
+      <div class="card-body bg-light border rounded shadow-sm p-3 input-group mb-4"
+           style="max-width: 500px; margin: auto;">
         <input
           type="text" [(ngModel)]="appState.productState.keyword"
           (keydown.enter)="getProducts()"
@@ -22,8 +23,8 @@
         <tr>
           <th>Name</th>
           <th>Price</th>
-          <th>Checked</th>
-          <th class="text-center">Actions</th>
+          <th *ngIf="appState.authState.roles.includes('ADMIN')">Checked</th>
+          <th *ngIf="appState.authState.roles.includes('ADMIN')" class="text-center">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -36,7 +37,7 @@
         <tr *ngFor="let product of appState.productState.products">
           <td>{{ product.name }}</td>
           <td>{{ product.price | currency }}</td>
-          <td>
+          <td *ngIf="appState.authState.roles.includes('ADMIN')">
             <button (click)="handleCheckProduct(product)" class="btn btn-outline-success">
               <i [class]="product.checked ? 'bi bi-check' : 'bi bi-circle'"></i>
             </button>
@@ -44,6 +45,7 @@
           <td class="text-center" style="white-space: nowrap;">
             <!-- Edit button with a pencil icon -->
             <button
+              *ngIf="appState.authState.roles.includes('ADMIN')"
               (click)="handleEditProduct(product)"
               class="btn btn-primary btn-sm mx-1"
               title="Modifier">
@@ -52,6 +54,7 @@
 
             <!-- Delete button with a trash icon -->
             <button
+              *ngIf="appState.authState.roles.includes('ADMIN')"
               (click)="handleDeleteProduct(product)"
               class="btn btn-danger btn-sm mx-1"
               title="Supprimer">

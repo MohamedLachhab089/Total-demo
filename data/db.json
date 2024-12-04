@@ -1,4 +1,20 @@
 {
+  "users": [
+    {
+      "id": "admin",
+      "username": "admin",
+      "password": "YWRtaW4=",
+      "roles": ["USER","ADMIN"],
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluIiwiaWF0IjoiMTUxNjIzOTAyMiIsImV4cCI6IjE1MTYyMzkwMjIiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODgvYXV0aCIsIm5iZiI6IjE1MTYyMzkwMjIiLCJmaXJzdG5hbWUiOiJNb2hhbWVkIiwibGFzdG5hbWUiOiJNb2hhbWVkIiwiZW1haWwiOiJtZWRsaGJAZ21haWwuY29tIiwicm9sZXMiOlsiVVNFUiIsIkFETUlOIl19.rt5-7qNEj3WkFDpKg87nQuGqhLxGIE0vByCaZ0gNPsE"
+    },
+    {
+      "id": "user1",
+      "username": "user1",
+      "password": "dXNlcjE=",
+      "roles": ["USER"],
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIxIiwiaWF0IjoiMTUxNjIzOTAyMiIsImV4cCI6IjE1MTYyMzkwMjIiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODgvYXV0aCIsIm5iZiI6IjE1MTYyMzkwMjIiLCJmaXJzdG5hbWUiOiJNb2hhbWVkIiwibGFzdG5hbWUiOiJNb2hhbWVkIiwiZW1haWwiOiJtZWRsaGJAZ21haWwuY29tIiwicm9sZXMiOlsiVVNFUiJdfQ.S8gXpADYxHFgn6IIpmxV7ptPvWE1Fa__JVfO25O0C68"
+    }
+  ],
   "products": [
     {
       "id": "1",

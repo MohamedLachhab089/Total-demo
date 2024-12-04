@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="col-md-6 col-lg-4">
+    <div class="card shadow-lg">
+      <div class="card-header text-center bg-primary text-white">
+        <h4 class="mb-0">Authentication</h4>
+      </div>
+      <div class="card-body p-4">
+        <div *ngIf="errorMessage" class="alert alert-danger text-center">
+          {{ errorMessage }}
+        </div>
+        <form [formGroup]="formLogin" (ngSubmit)="handleLogin()">
+          <!-- Username Field -->
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              id="username"
+              type="text"
+              class="form-control"
+              formControlName="username"
+              placeholder="Enter your username"
+            >
+          </div>
+          <!-- Password Field -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              id="password"
+              type="password"
+              class="form-control"
+              formControlName="password"
+              placeholder="Enter your password"
+            >
+          </div>
+          <!-- Login Button -->
+          <div class="d-flex justify-content-center mt-4">
+            <button type="submit" class="btn btn-success w-75">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
